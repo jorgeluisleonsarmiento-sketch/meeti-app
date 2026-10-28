@@ -79,7 +79,7 @@ class AuthService {
             if (error instanceof APIError) {
                 const messagesError: Record<number, string> = {
                     401: 'Credenciales invalidas',
-                    403: 'No autorizado'
+                    403: 'Tu cuenta no ha sido verificada, hemos enviado un email'
                 }
                 if (messagesError) {
                     return {

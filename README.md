@@ -445,5 +445,34 @@ Query ofrece una sintaxis mas al estilo Query Builder. Mientra que select es mas
               orderBy : (users, {desc}) => [desc(users.id)]
             })
 
-#   m e e t i - a p p  
+# mailtrap para centralizar los correos 
+https://mailtrap.io/onboarding
+
+var transport = nodemailer.createTransport({
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "5ff34d09e46c2b",
+    pass: "8b6f439699ca16"
+  }
+});
+
+transport.sendMail({
+  from: "Private Person <from@example.com>",
+  to: "A Test User <to@example.com>",
+  subject: "Hello from Mailtrap",
+  text: "This is a test e-mail message."
+}, (error, info) => {
+  if (error) {
+    return console.log(error);
+  }
+  console.log("Message sent: %s", info.messageId);
+});
+
+
+
+dependencia 
+https://nodemailer.com/
+
+
  
