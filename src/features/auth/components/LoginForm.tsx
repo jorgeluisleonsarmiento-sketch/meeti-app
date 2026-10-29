@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SignInInput, SignInSchema } from '../schemas/AuthSchema'
 import { signInAction } from '../actions/auth-actions'
 import toast from 'react-hot-toast'
+import { redirect } from 'next/navigation'
 
 export default function LoginForm() {
 
@@ -24,6 +25,7 @@ export default function LoginForm() {
         if (success) {
             toast.success(success)
             reset()
+            redirect('/dashboard')
         }
     }
 

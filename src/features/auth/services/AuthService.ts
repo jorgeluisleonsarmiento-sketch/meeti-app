@@ -30,9 +30,11 @@ class AuthService {
             body: {
                 email,
                 password,
-                name
+                name,
+                callbackURL: '/dashboard'
 
-            }
+            },
+            headers: await headers()
         })
         /* } catch (error) {
              if (error instanceof APIError) {
