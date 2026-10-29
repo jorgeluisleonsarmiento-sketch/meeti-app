@@ -15,7 +15,7 @@ export async function requiredAuth() {
     const session = await getServerSession()
     return {
         session,
-        isAuth: session ? true : false
+        isAuth: !!session
     }
 
 }

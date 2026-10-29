@@ -1,8 +1,6 @@
 import Hero from "@/components/ui/Hero";
-import { auth } from "@/src/lib/auth";
 import { generatePageTiltle } from "@/src/shared/utils/Metadata";
 import { Metadata } from "next";
-import { headers } from "next/headers";
 
 
 export const metadata: Metadata = {

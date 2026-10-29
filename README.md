@@ -470,9 +470,12 @@ transport.sendMail({
 });
 
 
-
 dependencia 
 https://nodemailer.com/
 
+## Iconos 
+npm i @heroicons/react @headlessui/react
 
- 
+npm i @heroicons/react 
+npm i @headlessui/react
+
