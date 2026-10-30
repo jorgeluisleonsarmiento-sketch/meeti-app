@@ -9,13 +9,11 @@ export const metadata: Metadata = {
 }
 
 // http://localhost:3000
-export default async function Home() {
+export default function Home() {
 
 
   return (
-    <>
-      <Hero />
+    <Hero />
 
-    </>
   );
 }

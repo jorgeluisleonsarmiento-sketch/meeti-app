@@ -1,13 +1,14 @@
 import { headers } from "next/headers"
+import { connection } from "next/server"
 import { auth } from "./auth"
 
 // Revision si un usuario esta autenticado
 
 export async function getServerSession() {
+    await connection()
     const session = await auth.api.getSession({
         headers: await headers(),
     })
-    console.log('session', session)
     return session
 }
 
