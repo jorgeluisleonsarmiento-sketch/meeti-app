@@ -2,7 +2,7 @@
 
 
 
-import { SignInInput, SignInSchema, SignUpinput, SignUpSchema } from "../schemas/AuthSchema"
+import { ForgotPassword, ForgotPasswordSchema, resetAndConfimPasswordSchema, resetConfirmPassword, SignInInput, SignInSchema, SignUpinput, SignUpSchema } from "../schemas/AuthSchema"
 import { authService } from "../services/AuthService"
 
 export async function signUpAction(input: SignUpinput) {
@@ -35,4 +35,34 @@ export async function signInAction(input: SignInInput) {
     const response = await authService.login(data.data)
 
     return response
+}
+
+export async function forgotPasswordAction(input: ForgotPassword) {
+    const data = ForgotPasswordSchema.safeParse(input)
+
+    if(!data.success) {
+        return {
+            error: 'Hubo un error',
+            success: ''
+        }
+    }
+
+    const response = await authService.requestPasswordEmail(data.data)
+    return response
+}
+
+
+export async function setPasswordAction(input: resetConfirmPassword, token: string) {
+        const data = resetAndConfimPasswordSchema.safeParse(input)
+
+        if (!data.success) {
+            return {
+                error: 'Hubo un error',
+                success: ''
+            }
+        }
+
+        const response = await authService.confirmPasswordReset(data.data, token)
+
+        return response 
 }

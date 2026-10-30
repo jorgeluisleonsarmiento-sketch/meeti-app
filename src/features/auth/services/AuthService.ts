@@ -1,8 +1,8 @@
 import { auth } from "@/src/lib/auth"
-import { SignInInput, SignUpinput } from "../schemas/AuthSchema"
 import { APIError } from "better-auth"
-import { authRepository, IAuthRepository } from "./AuthRepository"
 import { headers } from "next/headers"
+import { ForgotPassword, resetConfirmPassword, SignInInput, SignUpinput } from "../schemas/AuthSchema"
+import { authRepository, IAuthRepository } from "./AuthRepository"
 
 
 class AuthService {
@@ -95,6 +95,54 @@ class AuthService {
         return {
             error: '',
             success: 'Exito'
+        }
+    }
+
+    async requestPasswordEmail(credentials: ForgotPassword) {
+         const { email } = credentials
+        const user = await this.authRepository.userExist(email) 
+        if (!user) {
+            return {
+                error: 'Informacion incorrecta, el usuario no existe',
+                success: ''
+            }
+        }
+
+        await auth.api.requestPasswordReset({
+            body: { email }
+        })
+        return {
+            error:'',
+            success: 'Hemos enviado un email con instrucciones para restablecer tu password, revisa tu bandeja de entrada'
+        }
+    }
+
+    async confirmPasswordReset(credentials: resetConfirmPassword, token: string) {
+        try {
+           await auth.api.resetPassword({
+            body: {
+                newPassword: credentials.newPassword,
+                token
+            }
+           })
+
+            return {
+                    error: '',
+                    success: 'password restablesido correctamente'
+                }
+        } catch (error) {
+            if (error instanceof APIError) {
+                return {
+                    error: 'token no valido',
+                    success: ''
+                }
+            }
+
+        }
+
+        return {
+            success: '',
+            error: ''
         }
     }
 }

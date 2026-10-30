@@ -1,6 +1,7 @@
 import { emailConfig } from "../config/config";
+import { renderPasswordResetEmail, renderPasswordResetEmailText } from "../templates/PasswordResetEmailTemplate";
 import { renderVerificationEmail, renderVerificationEmailText } from "../templates/VerificationEmailTemplate";
-import { VerificationEmailData } from "../types/type";
+import { PasswordResetEmailData, VerificationEmailData } from "../types/type";
 import { EmailService } from "./EmailService";
 
 export class AuthEmailService {
@@ -8,9 +9,19 @@ export class AuthEmailService {
         await EmailService.send({
             from: emailConfig.from.verification,
             to: data.email,
-            subject: 'Confirma tu cuenta en Meeti',
+            subject: 'Meeti - Confirma tu cuenta en Meeti',
             text: renderVerificationEmail(data),
             html: renderVerificationEmailText(data)
+        })
+    }
+
+    static async sendPasswordResetToken(data: PasswordResetEmailData ) : Promise<void> {
+        await EmailService.send({
+            from: emailConfig.from.passwordReset,
+            to: data.email,
+            subject: 'Meeti - Restablece tu passworden',
+            text: renderPasswordResetEmail(data),
+            html: renderPasswordResetEmailText(data)
         })
     }
 }
