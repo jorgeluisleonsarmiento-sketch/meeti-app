@@ -10,8 +10,8 @@ export class AuthEmailService {
             from: emailConfig.from.verification,
             to: data.email,
             subject: 'Meeti - Confirma tu cuenta en Meeti',
-            text: renderVerificationEmail(data),
-            html: renderVerificationEmailText(data)
+            html: renderVerificationEmail(data),
+            text: renderVerificationEmailText(data)
         })
     }
 
@@ -20,8 +20,8 @@ export class AuthEmailService {
             from: emailConfig.from.passwordReset,
             to: data.email,
             subject: 'Meeti - Restablece tu passworden',
-            text: renderPasswordResetEmail(data),
-            html: renderPasswordResetEmailText(data)
+            html: renderPasswordResetEmail(data),
+            text: renderPasswordResetEmailText(data)
         })
     }
 }
